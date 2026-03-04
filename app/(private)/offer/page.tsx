@@ -1,7 +1,13 @@
 'use client';
 
 import { Add, Remove } from '@mui/icons-material';
-import { Box, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useState } from 'react';
 import Card from '@/app/components/Card';
 import Button from '@/app/components/Button';
@@ -175,10 +181,19 @@ export default function OfferPage(): React.ReactNode {
           inputProps={{ inputMode: 'numeric' }}
         />
         <Box
-          sx={{ display: 'flex', justifyContent: 'space-between', mb: 3, mt: -1 }}
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            mb: 3,
+            mt: -1,
+          }}
         >
-          <Typography variant="body2">Min. {formatCurrency(minAmount)}</Typography>
-          <Typography variant="body2">Max. {formatCurrency(maxAmount)}</Typography>
+          <Typography variant="body2">
+            Min. {formatCurrency(minAmount)}
+          </Typography>
+          <Typography variant="body2">
+            Max. {formatCurrency(maxAmount)}
+          </Typography>
         </Box>
 
         <TextField
@@ -231,7 +246,12 @@ export default function OfferPage(): React.ReactNode {
           inputProps={{ inputMode: 'numeric' }}
         />
         <Box
-          sx={{ display: 'flex', justifyContent: 'space-between', mb: 4, mt: -1 }}
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            mb: 4,
+            mt: -1,
+          }}
         >
           <Typography variant="body2">{minTerm}</Typography>
           <Typography variant="body2">Meses</Typography>
@@ -245,4 +265,3 @@ export default function OfferPage(): React.ReactNode {
     </Card>
   );
 }
-
