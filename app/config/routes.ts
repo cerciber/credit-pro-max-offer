@@ -30,6 +30,11 @@ export const ROUTES_CONFIG: RouteConfig = {
     ...CLIENT_ROUTES_CONFIG.publicRoutes,
   },
   privateRoutes: {
+    offer: {
+      path: '/offer',
+      label: 'Oferta',
+      roles: ['admin', 'client'],
+    },
     home: {
       path: '/home',
       label: 'Inicio',
@@ -63,7 +68,7 @@ export const API_ROUTES = {
 
 export const DEFAULT_ROUTES: DefaultRouteConfig = {
   publicRoute: ROUTES_CONFIG.publicRoutes.login,
-  privateRoute: ROUTES_CONFIG.privateRoutes.home,
+  privateRoute: ROUTES_CONFIG.privateRoutes.offer,
   ...CLIENT_DEFAULT_ROUTES,
 };
 
