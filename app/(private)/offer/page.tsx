@@ -18,13 +18,14 @@ export default function OfferPage(): React.ReactNode {
   const minAmount = 1751000;
   const maxAmount = 13000000;
   const amountStep = 100000;
-  const minTerm = 36;
-  const maxTerm = 36;
+  const allowedTerms = [12, 24, 36, 48, 60];
+  const minTerm = allowedTerms[0];
+  const maxTerm = allowedTerms[allowedTerms.length - 1];
 
   const [amount, setAmount] = useState(maxAmount);
-  const [term, setTerm] = useState(minTerm);
+  const [term, setTerm] = useState(36);
   const [amountInput, setAmountInput] = useState(String(maxAmount));
-  const [termInput, setTermInput] = useState(String(minTerm));
+  const [termInput, setTermInput] = useState('36');
 
   const formatCurrency = (value: number): string => {
     return `$${new Intl.NumberFormat('es-CO').format(value)}`;
@@ -57,17 +58,27 @@ export default function OfferPage(): React.ReactNode {
     setTermInput(digits);
     if (digits) {
       const parsed = Number(digits);
-      if (!Number.isNaN(parsed)) {
-        setTerm(clamp(parsed, minTerm, maxTerm));
+      if (!Number.isNaN(parsed) && allowedTerms.includes(parsed)) {
+        setTerm(parsed);
       }
     }
   };
 
   const handleTermBlur = (): void => {
-    const parsed = Number(termInput || minTerm);
-    const clamped = clamp(parsed, minTerm, maxTerm);
-    setTerm(clamped);
-    setTermInput(String(clamped));
+    const parsed = Number(termInput || term);
+    if (allowedTerms.includes(parsed)) {
+      setTerm(parsed);
+      setTermInput(String(parsed));
+      return;
+    }
+
+    const nearest = allowedTerms.reduce((closest, current) => {
+      return Math.abs(current - parsed) < Math.abs(closest - parsed)
+        ? current
+        : closest;
+    }, allowedTerms[0]);
+    setTerm(nearest);
+    setTermInput(String(nearest));
   };
 
   const fieldSx = {
@@ -184,7 +195,9 @@ export default function OfferPage(): React.ReactNode {
                 <IconButton
                   size="small"
                   onClick={() => {
-                    const next = Math.max(minTerm, term - 1);
+                    const currentIndex = allowedTerms.indexOf(term);
+                    const nextIndex = Math.max(0, currentIndex - 1);
+                    const next = allowedTerms[nextIndex];
                     setTerm(next);
                     setTermInput(String(next));
                   }}
@@ -199,7 +212,12 @@ export default function OfferPage(): React.ReactNode {
                 <IconButton
                   size="small"
                   onClick={() => {
-                    const next = Math.min(maxTerm, term + 1);
+                    const currentIndex = allowedTerms.indexOf(term);
+                    const nextIndex = Math.min(
+                      allowedTerms.length - 1,
+                      currentIndex + 1
+                    );
+                    const next = allowedTerms[nextIndex];
                     setTerm(next);
                     setTermInput(String(next));
                   }}
