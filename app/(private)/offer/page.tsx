@@ -267,7 +267,14 @@ export default function OfferPage(): React.ReactNode {
           <Typography variant="body2">{maxTerm}</Typography>
         </Box>
 
-        <Button type="button" colorStyle="primary" sx={{ width: '100%' }}>
+        <Button
+          type="button"
+          colorStyle="primary"
+          sx={{ width: '100%' }}
+          onClick={() => {
+            window.parent.postMessage({ type: 'CREDIT_FLOW_CONTINUE' }, '*');
+          }}
+        >
           Continuar
         </Button>
       </Box>
