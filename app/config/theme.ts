@@ -98,6 +98,17 @@ export const THEME_CONFIG = {
     },
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        html: {
+          backgroundColor: 'transparent',
+        },
+        body: {
+          backgroundColor: 'transparent',
+          backgroundImage: 'none',
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {

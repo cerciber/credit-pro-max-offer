@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Card from '@/app/components/Card';
 import Button from '@/app/components/Button';
 import { useAuth } from '@/app/components/AuthContext';
@@ -32,6 +32,11 @@ export default function OfferPage(): React.ReactNode {
   const [term, setTerm] = useState(36);
   const [amountInput, setAmountInput] = useState(String(maxAmount));
   const [termInput, setTermInput] = useState('36');
+
+  useEffect(() => {
+    // Notify parent iframe host that the offer UI is fully mounted.
+    window.parent.postMessage({ type: 'CREDIT_FLOW_READY' }, '*');
+  }, []);
 
   const formatCurrency = (value: number): string => {
     return `$${new Intl.NumberFormat('es-CO').format(value)}`;
@@ -113,6 +118,10 @@ export default function OfferPage(): React.ReactNode {
   return (
     <Card data-testid="offer-page-card">
       <Box sx={{ maxWidth: 520, mx: 'auto', textAlign: 'center' }}>
+        <Typography variant="h2" sx={{ mb: 5 }}>
+          Personalizar oferta
+        </Typography>
+
         <Typography variant="h5" sx={{ mb: 1.5 }}>
           {formatDisplayName(user?.username)}, tiene la posibilidad de tomar un
           crédito hasta $13.000.000

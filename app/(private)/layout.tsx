@@ -3,7 +3,6 @@
 import { useSearchParams } from 'next/navigation';
 import Navigation from './components/Navigation';
 import AuthenticatedLayout from './components/AuthenticatedLayout';
-import PageContainer from '@/app/components/PageContainer';
 
 export default function AuthenticatedLayoutWrapper({
   children,
@@ -16,7 +15,7 @@ export default function AuthenticatedLayoutWrapper({
   return (
     <AuthenticatedLayout>
       {!hideNavigation && <Navigation />}
-      <PageContainer>{children}</PageContainer>
+      {children}
     </AuthenticatedLayout>
   );
 }

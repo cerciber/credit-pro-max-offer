@@ -7,13 +7,14 @@
 html,
 body {
   overflow-x: hidden;
+  background: transparent;
   font-family: var(--font-montserrat), var(--font-open-sans), 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background: var(--theme-background-gradient);
+  background: transparent;
   min-height: 100dvh;
 }
 
